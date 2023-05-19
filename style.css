@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root{
+  font-size: 16px; /*ajuda para alterar o tamanho das fontes em diferentes telas. Com esse comando, estamos dizendo que toda a página vai ter como referência o tamanho de fonte em 16px. Logo, se esse font size do root for alterado, todos os fonts sizes do restante da página que estiverem utilizando-o como referência vão se alterar também. */
+}
+
+::-webkit-scrollbar{
+  width: 8px;
+}
+
+::-webkit-scrollbar-track{
+  background-color: #2c2c31;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: #9e9ea0;
+}
+
+@keyframes entering{
+  from {
+    opacity: 0;
+    transform: translateY(-200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+body{
+  background-color: #121215;
+  color: #EAEAEa;
+  font-family: 'Roboto', sans-serif;
+  display: grid;
+  grid-template-areas: "profile timeline";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 100vh;
+}
+
+nav{
+  padding: 64px;
+  grid-area: timeline;
+
+  overflow-y: scroll; /* significa que quando o conteudo não couber no eixo horizontal, ele irá adicionar um scrrol */
+  animation: entering .7s ease-in-out;
+}
+
+.memory{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-decoration: none;
+  margin-bottom: 64px;
+}
+
+.memory small{
+  color: #BEBEBF;
+  font-size: 0.75rem;
+}
+
+.memory h1{
+  font-size: 2rem;
+  color: #EAEAEa;
+}
+
+.memory img{
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.memory div{
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.memory:hover img{ /* usando o hover dessa forma significa que quando o mouse passar no elemento que tenha a classe memory, apenas a imagem que está dentro dele irá sofrer as alterações especificadas em seguida */
+  transform: scale(1.1);
+}
+
+.memory p{
+  font-size: 1.2rem;
+  color: #BEBEBF;
+  line-height: 28px;
+}
+
+aside{
+  background-image: url(./assets/background.svg);
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: auto 100%;
+  grid-area: profile;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  border-right: 1px solid;
+  border-image: linear-gradient(#727275, #2c2c31) 1; /*colocando a borda especificada acima como gradient. A opcaidade está com 1 */
+
+}
+
+aside *{ /* o asteristico sinaliza que estão sendo selecionados todos os elementos de dentro do elemento aside. Ou seja, apenas os elementos que estão dentro dele irão receber as moficações que vierem no bloco de código. O ASIDE NÃO RECEBERÁ ESSAS MODIFICAÇÕES, APENAS OS ELEMENTOS DENTRO DELE. */
+  animation: entering .7s ease-in-out;
+}
+
+aside img:nth-child(2){
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  background: linear-gradient(#d39e33, #ed5636, #633bbc) padding-box, linear-gradient(260deg,
+  #d39e33, #ed5636, #633bbc) border-box;
+}
+
+aside p{
+  font-size: 2rem;
+  text-align: center;
+}
+
+aside span{
+  font-size: 0.75rem;
+  color: #9e9ea0;
+}
+
+@media (max-width: 768px){ /*quando o site estiver com uma tela em que a largura dela seja no máximo 768px, ele irá aplicar as configurações declaradas */
+  :root{
+    font-size: 14px;
+  }
+  body{
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 0.8fr;
+    grid-template-areas: 
+    "profile"
+    "timeline";
+  }
+
+  aside{
+    border-right: none;
+    padding: 32px 12px;
+  }
+
+  nav{
+    overflow-y: visible; /*faz com que o conteudo que ultrapasse a altura do eixo y do elemento nav fique visível. Com isso, a barra de rolagem definida anteriormente sai */
+    padding: 22px;
+  }
+}
